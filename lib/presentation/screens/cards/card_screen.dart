@@ -89,7 +89,7 @@ class _CardType2 extends StatelessWidget {
 
     return Card(
       shape:  RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(12)),
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
         side: BorderSide(
           color: colors.outline
         )
@@ -158,8 +158,6 @@ class _CardType4 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final colors = Theme.of(context).colorScheme;
-
     return Card(
       clipBehavior: Clip.hardEdge,
       elevation: elevation,
@@ -173,8 +171,8 @@ class _CardType4 extends StatelessWidget {
           Align(
               alignment: Alignment.topRight,
               child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
+                decoration: const BoxDecoration(
+                  color: Color.fromARGB(255, 18, 16, 16),
                   borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20))
                 ),
                 child: IconButton(
