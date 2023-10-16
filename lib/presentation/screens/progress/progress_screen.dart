@@ -30,7 +30,7 @@ class _ProgressView extends StatelessWidget {
           SizedBox(height: 10),
           CircularProgressIndicator(strokeWidth: 2, backgroundColor: Colors.black45,),
           SizedBox(height: 20),
-          Text('Progress Indicator Controlado'),
+          Text('Circular y Linear Controlado'),
           SizedBox(height: 10),
           _ControlledProgressIndicator(),
 
@@ -40,11 +40,52 @@ class _ProgressView extends StatelessWidget {
   }
 }
 
+
 class _ControlledProgressIndicator extends StatelessWidget {
   const _ControlledProgressIndicator();
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return StreamBuilder(
+      stream: Stream.periodic(const Duration(milliseconds: 300),(value){
+        return (value*2)/100;
+      }).takeWhile((value) => value<100),
+      builder: (context, snapshot) {
+
+        final progressValue = snapshot.data ?? 0;
+
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircularProgressIndicator(value: progressValue,strokeWidth: 2, backgroundColor: Colors.black12,),
+              SizedBox(width: 20,),
+              Expanded(child: LinearProgressIndicator(value: progressValue,))
+            ],
+          ),
+          );
+      }
+    );
   }
 }
+
+
+// class _ControlledProgressIndicator extends StatelessWidget {
+//   const _ControlledProgressIndicator();
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//       padding: const EdgeInsets.symmetric(horizontal: 20),
+//       child: Row(
+//         mainAxisAlignment: MainAxisAlignment.center,
+//         children: [
+//           CircularProgressIndicator(value: 0.5,strokeWidth: 2, backgroundColor: Colors.black12,),
+//           SizedBox(width: 20,),
+//           Expanded(child: LinearProgressIndicator(value: 0.7,))
+//         ],
+//       ),
+//       );
+//   }
+// }
